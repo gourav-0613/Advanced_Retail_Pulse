@@ -1,0 +1,281 @@
+/* =======================================================
+   RetailPulse Dashboard Theme
+======================================================= */
+
+/* ------------------------------
+   Main Background
+------------------------------ */
+
+.main {
+    background-color: #0E1117;
+}
+
+/* ------------------------------
+   Container
+------------------------------ */
+
+.block-container {
+    padding-top: 1rem;
+    padding-bottom: 2rem;
+    max-width: 95%;
+}
+
+section.main > div {
+    padding-top: 0.5rem;
+}
+
+/* ------------------------------
+   Headings
+------------------------------ */
+
+h1 {
+    color: #FFFFFF;
+    font-weight: 700;
+}
+
+h2 {
+    color: #F8FAFC;
+    font-weight: 600;
+}
+
+h3 {
+    color: #E5E7EB;
+    font-weight: 600;
+}
+
+p {
+    color: #C9D1D9;
+    font-size: 15px;
+}
+
+/* ------------------------------
+   KPI Cards
+------------------------------ */
+
+div[data-testid="metric-container"] {
+
+    background: linear-gradient(
+        135deg,
+        #161B22,
+        #1F2937
+    );
+
+    border-radius: 18px;
+
+    padding: 22px;
+
+    border: 1px solid #2E3A4E;
+
+    box-shadow: 0 8px 20px rgba(0,0,0,.35);
+
+    transition: all .30s ease;
+
+}
+
+div[data-testid="metric-container"]:hover {
+
+    transform: translateY(-5px);
+
+    box-shadow: 0 12px 28px rgba(0,0,0,.45);
+
+}
+
+/* ------------------------------
+   Sidebar
+------------------------------ */
+
+section[data-testid="stSidebar"] {
+
+    background: #121822;
+
+    border-right: 1px solid #293548;
+
+}
+
+section[data-testid="stSidebar"] h1,
+section[data-testid="stSidebar"] h2,
+section[data-testid="stSidebar"] h3 {
+
+    color: white;
+
+}
+
+/* ------------------------------
+   Buttons
+------------------------------ */
+
+.stButton > button {
+
+    width: 100%;
+
+    height: 48px;
+
+    border-radius: 14px;
+
+    font-weight: 600;
+
+    border: none;
+
+    background: #1F6FEB;
+
+    color: white;
+
+    transition: .30s;
+
+}
+
+.stButton > button:hover {
+
+    background: #388BFD;
+
+    transform: scale(1.02);
+
+}
+
+/* ------------------------------
+   Plotly Charts
+------------------------------ */
+
+div[data-testid="stPlotlyChart"] {
+
+    background: #161B22;
+
+    border-radius: 18px;
+
+    padding: 10px;
+
+    margin-bottom: 20px;
+
+    border: 1px solid #293548;
+
+}
+
+/* ------------------------------
+   DataFrame
+------------------------------ */
+
+.stDataFrame {
+
+    border-radius: 18px;
+
+    overflow: hidden;
+
+}
+
+/* ------------------------------
+   Tables
+------------------------------ */
+
+thead tr {
+
+    background: #1F2937;
+
+}
+
+/* ------------------------------
+   Expander
+------------------------------ */
+
+details {
+
+    background: #161B22;
+
+    border-radius: 14px;
+
+    padding: 12px;
+
+    border: 1px solid #293548;
+
+}
+
+/* ------------------------------
+   Horizontal Line
+------------------------------ */
+
+hr {
+
+    border: 1px solid #293548;
+
+}
+
+/* ------------------------------
+   Scrollbar
+------------------------------ */
+
+::-webkit-scrollbar {
+
+    width: 8px;
+
+}
+
+::-webkit-scrollbar-track {
+
+    background: #0E1117;
+
+}
+
+::-webkit-scrollbar-thumb {
+
+    background: #2F81F7;
+
+    border-radius: 20px;
+
+}
+
+/* ------------------------------
+   Hide Streamlit Branding & Deploy Button
+------------------------------ */
+
+#MainMenu {
+    display: none !important;
+}
+
+footer {
+    display: none !important;
+}
+
+[data-testid="stAppDeployButton"] {
+    display: none !important;
+}
+
+[data-testid="stDecoration"] {
+    display: none !important;
+}
+
+header[data-testid="stHeader"] {
+    background: transparent !important;
+    z-index: 99999 !important;
+}
+
+/* Force the sidebar collapse/expand control to always be visible, styled, and clickable */
+[data-testid="collapsedControl"],
+[data-testid="stSidebarCollapseButton"],
+button[aria-label="Expand sidebar"],
+button[aria-label="Collapse sidebar"],
+button[aria-label="Open sidebar"],
+button[aria-label="Close sidebar"] {
+    visibility: visible !important;
+    display: flex !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    z-index: 100000 !important;
+    color: #FFFFFF !important;
+    background-color: rgba(30, 41, 59, 0.7) !important;
+    border-radius: 8px !important;
+    padding: 4px !important;
+}
+
+[data-testid="collapsedControl"]:hover,
+[data-testid="stSidebarCollapseButton"]:hover,
+button[aria-label="Expand sidebar"]:hover,
+button[aria-label="Collapse sidebar"]:hover {
+    background-color: rgba(56, 139, 253, 0.4) !important;
+}
+
+[data-testid="collapsedControl"] svg,
+[data-testid="stSidebarCollapseButton"] svg,
+button[aria-label="Expand sidebar"] svg,
+button[aria-label="Collapse sidebar"] svg {
+    fill: #FFFFFF !important;
+    color: #FFFFFF !important;
+}

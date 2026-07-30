@@ -1,0 +1,64 @@
+<svg width="1920" height="1080" viewBox="0 0 1920 1080" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="glowA" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#3B82F6" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#3B82F6" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glowB" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#60A5FA" stop-opacity="0.09"/>
+      <stop offset="100%" stop-color="#60A5FA" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glowC" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#1D4ED8" stop-opacity="0.08"/>
+      <stop offset="100%" stop-color="#1D4ED8" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="vignette" cx="50%" cy="50%" r="75%">
+      <stop offset="70%" stop-color="#000000" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0.35"/>
+    </radialGradient>
+    <linearGradient id="baseFade" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#060A14"/>
+      <stop offset="50%" stop-color="#05070E"/>
+      <stop offset="100%" stop-color="#03050A"/>
+    </linearGradient>
+    <filter id="blurLarge" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="60"/>
+    </filter>
+    <filter id="blurMed" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="30"/>
+    </filter>
+    <pattern id="fineGrid" width="48" height="48" patternUnits="userSpaceOnUse">
+      <path d="M 48 0 L 0 0 0 48" fill="none" stroke="#3B82F6" stroke-opacity="0.02" stroke-width="1"/>
+    </pattern>
+    <pattern id="largeGrid" width="192" height="192" patternUnits="userSpaceOnUse">
+      <path d="M 192 0 L 0 0 0 192" fill="none" stroke="#60A5FA" stroke-opacity="0.025" stroke-width="1"/>
+    </pattern>
+  </defs>
+
+  <!-- Base -->
+  <rect width="1920" height="1080" fill="url(#baseFade)"/>
+
+  <!-- Light grid layers -->
+  <rect width="1920" height="1080" fill="url(#fineGrid)"/>
+  <rect width="1920" height="1080" fill="url(#largeGrid)"/>
+
+  <!-- Soft glowing circles, positioned so edges tile reasonably seamlessly -->
+  <circle cx="280" cy="200" r="360" fill="url(#glowA)" filter="url(#blurLarge)"/>
+  <circle cx="1680" cy="220" r="320" fill="url(#glowB)" filter="url(#blurLarge)"/>
+  <circle cx="960" cy="620" r="420" fill="url(#glowC)" filter="url(#blurLarge)"/>
+  <circle cx="220" cy="920" r="300" fill="url(#glowB)" filter="url(#blurLarge)"/>
+  <circle cx="1740" cy="960" r="360" fill="url(#glowA)" filter="url(#blurLarge)"/>
+
+  <!-- Smaller accent glows for depth -->
+  <circle cx="620" cy="380" r="140" fill="url(#glowB)" filter="url(#blurMed)"/>
+  <circle cx="1320" cy="700" r="160" fill="url(#glowA)" filter="url(#blurMed)"/>
+  <circle cx="960" cy="150" r="110" fill="url(#glowC)" filter="url(#blurMed)"/>
+
+  <!-- Subtle glass panel sheen bands (no objects/icons — pure abstract translucency) -->
+  <rect x="-100" y="480" width="2120" height="140" fill="#3B82F6" opacity="0.015" transform="rotate(-4 960 550)"/>
+  <rect x="-100" y="700" width="2120" height="90" fill="#60A5FA" opacity="0.012" transform="rotate(3 960 745)"/>
+
+  <!-- Vignette to focus attention toward center -->
+  <rect width="1920" height="1080" fill="url(#vignette)"/>
+
+</svg>

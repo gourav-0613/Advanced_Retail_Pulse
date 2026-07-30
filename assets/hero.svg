@@ -1,0 +1,260 @@
+<svg width="1920" height="1080" viewBox="0 0 1920 1080" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="bgGlowTop" cx="30%" cy="10%" r="60%">
+      <stop offset="0%" stop-color="#1E3A8A" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="bgGlowBottom" cx="80%" cy="95%" r="55%">
+      <stop offset="0%" stop-color="#2563EB" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="glassPanel" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#3B82F6" stop-opacity="0.14"/>
+      <stop offset="100%" stop-color="#0F172A" stop-opacity="0.08"/>
+    </linearGradient>
+    <linearGradient id="glassPanelLight" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#60A5FA" stop-opacity="0.20"/>
+      <stop offset="100%" stop-color="#0F172A" stop-opacity="0.05"/>
+    </linearGradient>
+    <linearGradient id="barGrad" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0%" stop-color="#1D4ED8"/>
+      <stop offset="100%" stop-color="#60A5FA"/>
+    </linearGradient>
+    <linearGradient id="lineGlow" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#3B82F6" stop-opacity="0.2"/>
+      <stop offset="50%" stop-color="#60A5FA" stop-opacity="1"/>
+      <stop offset="100%" stop-color="#3B82F6" stop-opacity="0.2"/>
+    </linearGradient>
+    <filter id="blurSoft" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="18"/>
+    </filter>
+    <filter id="blurGlass" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="1.2"/>
+    </filter>
+    <filter id="neonGlow" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <pattern id="grid" width="64" height="64" patternUnits="userSpaceOnUse">
+      <path d="M 64 0 L 0 0 0 64" fill="none" stroke="#3B82F6" stroke-opacity="0.06" stroke-width="1"/>
+    </pattern>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1920" height="1080" fill="#050810"/>
+  <rect width="1920" height="1080" fill="url(#grid)"/>
+  <rect width="1920" height="1080" fill="url(#bgGlowTop)"/>
+  <rect width="1920" height="1080" fill="url(#bgGlowBottom)"/>
+
+  <!-- Ambient glow orbs -->
+  <circle cx="260" cy="180" r="220" fill="#3B82F6" opacity="0.10" filter="url(#blurSoft)"/>
+  <circle cx="1750" cy="900" r="260" fill="#60A5FA" opacity="0.10" filter="url(#blurSoft)"/>
+
+  <!-- Faint network / AI nodes connecting lines (background layer) -->
+  <g stroke="#3B82F6" stroke-opacity="0.18" stroke-width="1.5">
+    <line x1="120" y1="900" x2="340" y2="760"/>
+    <line x1="340" y1="760" x2="560" y2="840"/>
+    <line x1="1600" y1="180" x2="1780" y2="260"/>
+    <line x1="1780" y1="260" x2="1720" y2="420"/>
+  </g>
+  <g fill="#60A5FA">
+    <circle cx="120" cy="900" r="4" opacity="0.5"/>
+    <circle cx="340" cy="760" r="4" opacity="0.5"/>
+    <circle cx="560" cy="840" r="4" opacity="0.5"/>
+    <circle cx="1600" cy="180" r="4" opacity="0.5"/>
+    <circle cx="1780" cy="260" r="4" opacity="0.5"/>
+    <circle cx="1720" cy="420" r="4" opacity="0.5"/>
+  </g>
+
+  <!-- ===================== MAIN DASHBOARD GLASS PANEL ===================== -->
+  <g>
+    <rect x="420" y="150" width="1080" height="700" rx="28"
+          fill="url(#glassPanel)" stroke="#3B82F6" stroke-opacity="0.35" stroke-width="1.5"/>
+    <!-- inner top bar -->
+    <rect x="452" y="184" width="1016" height="46" rx="12" fill="#3B82F6" fill-opacity="0.10"/>
+    <circle cx="480" cy="207" r="7" fill="#60A5FA" opacity="0.8"/>
+    <circle cx="508" cy="207" r="7" fill="#3B82F6" opacity="0.6"/>
+    <circle cx="536" cy="207" r="7" fill="#1D4ED8" opacity="0.5"/>
+    <rect x="1200" y="196" width="240" height="22" rx="11" fill="#60A5FA" fill-opacity="0.14"/>
+
+    <!-- Main forecast line chart area -->
+    <rect x="452" y="256" width="1016" height="330" rx="16" fill="#0B1220" fill-opacity="0.5"/>
+
+    <!-- grid inside chart -->
+    <g stroke="#3B82F6" stroke-opacity="0.10" stroke-width="1">
+      <line x1="452" y1="326" x2="1468" y2="326"/>
+      <line x1="452" y1="396" x2="1468" y2="396"/>
+      <line x1="452" y1="466" x2="1468" y2="466"/>
+      <line x1="452" y1="536" x2="1468" y2="536"/>
+    </g>
+
+    <!-- Historical + forecast area fill -->
+    <path d="M 470 520 L 560 480 L 650 500 L 740 430 L 830 450 L 920 380
+             L 1010 400 L 1100 330 L 1190 350 L 1280 280 L 1370 300 L 1450 240
+             L 1450 580 L 470 580 Z"
+          fill="#3B82F6" fill-opacity="0.12"/>
+
+    <!-- Historical line (solid) -->
+    <path d="M 470 520 L 560 480 L 650 500 L 740 430 L 830 450 L 920 380 L 1010 400"
+          fill="none" stroke="#60A5FA" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"
+          filter="url(#neonGlow)"/>
+
+    <!-- Forecast line (dashed / projected) -->
+    <path d="M 1010 400 L 1100 330 L 1190 350 L 1280 280 L 1370 300 L 1450 240"
+          fill="none" stroke="#93C5FD" stroke-width="4" stroke-dasharray="2 12" stroke-linecap="round"
+          stroke-linejoin="round" filter="url(#neonGlow)"/>
+
+    <!-- Forecast confidence band -->
+    <path d="M 1010 400 L 1100 300 L 1190 320 L 1280 240 L 1370 260 L 1450 190
+             L 1450 290 L 1370 340 L 1280 320 L 1190 380 L 1100 360 L 1010 400 Z"
+          fill="#60A5FA" fill-opacity="0.08"/>
+
+    <!-- data point nodes -->
+    <g fill="#FFFFFF">
+      <circle cx="920" cy="380" r="5"/>
+      <circle cx="1010" cy="400" r="6" fill="#60A5FA"/>
+      <circle cx="1280" cy="280" r="5" fill="#93C5FD"/>
+    </g>
+
+    <!-- ===== Bottom split: Bar chart (left) + Heatmap (right) ===== -->
+    <!-- Bar chart: analytics bars -->
+    <rect x="452" y="604" width="486" height="222" rx="16" fill="#0B1220" fill-opacity="0.5"/>
+    <g>
+      <rect x="480" y="740" width="46" height="60" rx="8" fill="url(#barGrad)"/>
+      <rect x="540" y="700" width="46" height="100" rx="8" fill="url(#barGrad)"/>
+      <rect x="600" y="660" width="46" height="140" rx="8" fill="url(#barGrad)"/>
+      <rect x="660" y="630" width="46" height="170" rx="8" fill="url(#barGrad)"/>
+      <rect x="720" y="670" width="46" height="130" rx="8" fill="url(#barGrad)"/>
+      <rect x="780" y="640" width="46" height="160" rx="8" fill="url(#barGrad)"/>
+      <rect x="840" y="620" width="46" height="180" rx="8" fill="url(#barGrad)"/>
+      <rect x="900" y="650" width="20" height="150" rx="6" fill="#60A5FA" fill-opacity="0.4"/>
+    </g>
+
+    <!-- Heatmap: inventory / demand grid -->
+    <rect x="954" y="604" width="514" height="222" rx="16" fill="#0B1220" fill-opacity="0.5"/>
+    <g>
+      <!-- 8 x 4 heatmap grid with varying blue opacity -->
+    </g>
+  </g>
+
+  <!-- Heatmap cells generated as a grid -->
+  <g>
+    <!-- row 1 -->
+    <rect x="978" y="628" width="52" height="40" rx="6" fill="#3B82F6" fill-opacity="0.85"/>
+    <rect x="1038" y="628" width="52" height="40" rx="6" fill="#3B82F6" fill-opacity="0.55"/>
+    <rect x="1098" y="628" width="52" height="40" rx="6" fill="#3B82F6" fill-opacity="0.30"/>
+    <rect x="1158" y="628" width="52" height="40" rx="6" fill="#3B82F6" fill-opacity="0.70"/>
+    <rect x="1218" y="628" width="52" height="40" rx="6" fill="#3B82F6" fill-opacity="0.20"/>
+    <rect x="1278" y="628" width="52" height="40" rx="6" fill="#3B82F6" fill-opacity="0.90"/>
+    <rect x="1338" y="628" width="52" height="40" rx="6" fill="#3B82F6" fill-opacity="0.45"/>
+    <rect x="1398" y="628" width="52" height="40" rx="6" fill="#3B82F6" fill-opacity="0.65"/>
+    <!-- row 2 -->
+    <rect x="978" y="676" width="52" height="40" rx="6" fill="#60A5FA" fill-opacity="0.40"/>
+    <rect x="1038" y="676" width="52" height="40" rx="6" fill="#60A5FA" fill-opacity="0.85"/>
+    <rect x="1098" y="676" width="52" height="40" rx="6" fill="#60A5FA" fill-opacity="0.60"/>
+    <rect x="1158" y="676" width="52" height="40" rx="6" fill="#60A5FA" fill-opacity="0.25"/>
+    <rect x="1218" y="676" width="52" height="40" rx="6" fill="#60A5FA" fill-opacity="0.75"/>
+    <rect x="1278" y="676" width="52" height="40" rx="6" fill="#60A5FA" fill-opacity="0.35"/>
+    <rect x="1338" y="676" width="52" height="40" rx="6" fill="#60A5FA" fill-opacity="0.90"/>
+    <rect x="1398" y="676" width="52" height="40" rx="6" fill="#60A5FA" fill-opacity="0.50"/>
+    <!-- row 3 -->
+    <rect x="978" y="724" width="52" height="40" rx="6" fill="#3B82F6" fill-opacity="0.30"/>
+    <rect x="1038" y="724" width="52" height="40" rx="6" fill="#3B82F6" fill-opacity="0.65"/>
+    <rect x="1098" y="724" width="52" height="40" rx="6" fill="#3B82F6" fill-opacity="0.90"/>
+    <rect x="1158" y="724" width="52" height="40" rx="6" fill="#3B82F6" fill-opacity="0.45"/>
+    <rect x="1218" y="724" width="52" height="40" rx="6" fill="#3B82F6" fill-opacity="0.20"/>
+    <rect x="1278" y="724" width="52" height="40" rx="6" fill="#3B82F6" fill-opacity="0.55"/>
+    <rect x="1338" y="724" width="52" height="40" rx="6" fill="#3B82F6" fill-opacity="0.80"/>
+    <rect x="1398" y="724" width="52" height="40" rx="6" fill="#3B82F6" fill-opacity="0.35"/>
+    <!-- row 4 -->
+    <rect x="978" y="772" width="52" height="40" rx="6" fill="#60A5FA" fill-opacity="0.70"/>
+    <rect x="1038" y="772" width="52" height="40" rx="6" fill="#60A5FA" fill-opacity="0.30"/>
+    <rect x="1098" y="772" width="52" height="40" rx="6" fill="#60A5FA" fill-opacity="0.50"/>
+    <rect x="1158" y="772" width="52" height="40" rx="6" fill="#60A5FA" fill-opacity="0.85"/>
+    <rect x="1218" y="772" width="52" height="40" rx="6" fill="#60A5FA" fill-opacity="0.40"/>
+    <rect x="1278" y="772" width="52" height="40" rx="6" fill="#60A5FA" fill-opacity="0.65"/>
+    <rect x="1338" y="772" width="52" height="40" rx="6" fill="#60A5FA" fill-opacity="0.25"/>
+    <rect x="1398" y="772" width="52" height="40" rx="6" fill="#60A5FA" fill-opacity="0.90"/>
+  </g>
+
+  <!-- ===================== FLOATING WIDGET: KPI card (top-left, overlapping) ===================== -->
+  <g>
+    <rect x="180" y="220" width="280" height="160" rx="20"
+          fill="url(#glassPanelLight)" stroke="#60A5FA" stroke-opacity="0.4" stroke-width="1.5"
+          filter="url(#blurGlass)"/>
+    <rect x="180" y="220" width="280" height="160" rx="20"
+          fill="none" stroke="#60A5FA" stroke-opacity="0.5" stroke-width="1.5"/>
+    <circle cx="216" cy="258" r="14" fill="#3B82F6" fill-opacity="0.5"/>
+    <path d="M 210 258 L 214 262 L 224 250" stroke="#FFFFFF" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <rect x="216" y="296" width="140" height="14" rx="7" fill="#93C5FD" fill-opacity="0.5"/>
+    <rect x="216" y="322" width="90" height="10" rx="5" fill="#60A5FA" fill-opacity="0.3"/>
+    <!-- mini sparkline -->
+    <path d="M 216 360 L 246 344 L 276 352 L 306 330 L 336 338 L 366 316"
+          fill="none" stroke="#60A5FA" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" filter="url(#neonGlow)"/>
+  </g>
+
+  <!-- ===================== FLOATING WIDGET: Donut / demand split (bottom-left) ===================== -->
+  <g transform="translate(180,700)">
+    <rect x="0" y="0" width="260" height="260" rx="24"
+          fill="url(#glassPanelLight)" stroke="#3B82F6" stroke-opacity="0.4" stroke-width="1.5"
+          filter="url(#blurGlass)"/>
+    <rect x="0" y="0" width="260" height="260" rx="24" fill="none" stroke="#3B82F6" stroke-opacity="0.5" stroke-width="1.5"/>
+    <g transform="translate(130,130)">
+      <circle r="78" fill="none" stroke="#0B1220" stroke-width="26"/>
+      <circle r="78" fill="none" stroke="#3B82F6" stroke-width="26"
+              stroke-dasharray="245 490" stroke-dashoffset="0" transform="rotate(-90)"
+              filter="url(#neonGlow)"/>
+      <circle r="78" fill="none" stroke="#60A5FA" stroke-width="26"
+              stroke-dasharray="150 490" stroke-dashoffset="-245" transform="rotate(-90)"/>
+      <circle r="78" fill="none" stroke="#93C5FD" stroke-width="26"
+              stroke-dasharray="95 490" stroke-dashoffset="-395" transform="rotate(-90)"/>
+    </g>
+  </g>
+
+  <!-- ===================== FLOATING WIDGET: AI forecast node (top-right, overlapping) ===================== -->
+  <g transform="translate(1560,120)">
+    <rect x="0" y="0" width="260" height="200" rx="20"
+          fill="url(#glassPanelLight)" stroke="#60A5FA" stroke-opacity="0.4" stroke-width="1.5"
+          filter="url(#blurGlass)"/>
+    <rect x="0" y="0" width="260" height="200" rx="20" fill="none" stroke="#60A5FA" stroke-opacity="0.5" stroke-width="1.5"/>
+    <!-- neural node network representing AI forecasting -->
+    <g stroke="#60A5FA" stroke-opacity="0.7" stroke-width="1.5">
+      <line x1="40" y1="60" x2="110" y2="40"/>
+      <line x1="40" y1="60" x2="110" y2="100"/>
+      <line x1="40" y1="130" x2="110" y2="100"/>
+      <line x1="40" y1="130" x2="110" y2="150"/>
+      <line x1="110" y1="40" x2="190" y2="80"/>
+      <line x1="110" y1="100" x2="190" y2="80"/>
+      <line x1="110" y1="100" x2="190" y2="140"/>
+      <line x1="110" y1="150" x2="190" y2="140"/>
+    </g>
+    <g fill="#FFFFFF">
+      <circle cx="40" cy="60" r="6"/>
+      <circle cx="40" cy="130" r="6"/>
+      <circle cx="110" cy="40" r="6" fill="#93C5FD"/>
+      <circle cx="110" cy="100" r="6" fill="#93C5FD"/>
+      <circle cx="110" cy="150" r="6" fill="#93C5FD"/>
+      <circle cx="190" cy="80" r="8" fill="#60A5FA" filter="url(#neonGlow)"/>
+      <circle cx="190" cy="140" r="8" fill="#60A5FA" filter="url(#neonGlow)"/>
+    </g>
+  </g>
+
+  <!-- ===================== FLOATING WIDGET: Inventory bar micro-card (bottom-right, overlapping) ===================== -->
+  <g transform="translate(1580,760)">
+    <rect x="0" y="0" width="230" height="180" rx="20"
+          fill="url(#glassPanelLight)" stroke="#3B82F6" stroke-opacity="0.4" stroke-width="1.5"
+          filter="url(#blurGlass)"/>
+    <rect x="0" y="0" width="230" height="180" rx="20" fill="none" stroke="#3B82F6" stroke-opacity="0.5" stroke-width="1.5"/>
+    <g>
+      <rect x="30" y="110" width="24" height="40" rx="6" fill="url(#barGrad)"/>
+      <rect x="70" y="90" width="24" height="60" rx="6" fill="url(#barGrad)"/>
+      <rect x="110" y="60" width="24" height="90" rx="6" fill="url(#barGrad)"/>
+      <rect x="150" y="80" width="24" height="70" rx="6" fill="url(#barGrad)"/>
+      <rect x="190" y="40" width="24" height="110" rx="6" fill="url(#barGrad)"/>
+    </g>
+  </g>
+
+</svg>
