@@ -1,4 +1,3 @@
- 
 # pyrefly: ignore [missing-import]
 import streamlit as st
 # pyrefly: ignore [missing-import]
@@ -20,6 +19,8 @@ from utils.preprocessing import (
     get_regions,
     get_categories
 )
+
+from components.ui import sidebar_brand, page_header, style_fig
 
 # ----------------------------------------------------
 # PAGE CONFIG
@@ -45,41 +46,18 @@ with open("assets/css.css") as f:
 # Sidebar Branding
 # =====================================================
 
-brand1, brand2 = st.sidebar.columns([1, 4], gap="small")
-
-with brand1:
-    st.image(
-        "assets/retailpulse-logo.png",
-        width=48
-    )
-
-with brand2:
-    st.markdown(
-        """
-        <div style="padding-top:10px;">
-            <h2 style="margin:0;font-size:24px;font-weight:700;color:white;">
-                Retail Pulse
-            </h2>
-        </div>
-        """,
-        unsafe_allow_html=True,
-    )
-
-st.sidebar.markdown("---")
-
+sidebar_brand()
 
 # ----------------------------------------------------
 # LOAD DATA
 # ----------------------------------------------------
 
 df = load_data("data/train.csv")
-
 df = clean_data(df)
-
 df = create_features(df)
 
 # ----------------------------------------------------
-# SIDEBAR
+# SIDEBAR FILTERS
 # ----------------------------------------------------
 
 st.sidebar.title("Dashboard Filters")
@@ -101,26 +79,10 @@ filtered_df = filter_data(
 )
 
 # ----------------------------------------------------
-# TITLE
+# TITLE & HEADER
 # ----------------------------------------------------
 
-col1, col2 = st.columns([0.6, 9])
-
-with col1:
-    st.image(
-        "assets/icons/icon-dashboard.svg",
-        width=45,
-    )
-
-with col2:
-    st.markdown(
-        "<h1 style='margin-top:8px;'>Sales Overview Dashboard</h1>",
-        unsafe_allow_html=True,
-    )
-
-st.caption(
-    "Analyze historical retail sales using interactive visualizations."
-)
+page_header("dashboard", "Sales Overview Dashboard", "Analyze historical retail sales using interactive visualizations.")
 
 st.markdown("---")
 
@@ -165,20 +127,18 @@ fig = px.bar(
     x="Year",
     y="Sales",
     title="Yearly Sales",
-    text_auto=True
 )
 
-fig.update_layout(
-    template="plotly_dark",
-    height=450,
-    margin=dict(
-        l=20,
-        r=20,
-        t=60,
-        b=20
-    ),
-    title_x=0.02,
+fig.update_traces(
+    texttemplate="$%{y:,.0f}",
+    textposition="outside",
+    cliponaxis=False,
 )
+
+fig.update_xaxes(dtick=1, tickformat="d")
+fig.update_yaxes(tickprefix="$", tickformat="~s")
+
+fig = style_fig(fig, height=450, margin_r=20)
 
 st.plotly_chart(
     fig,
@@ -199,17 +159,7 @@ fig2 = px.line(
     title="Monthly Sales Trend"
 )
 
-fig2.update_layout(
-    template="plotly_dark",
-    height=450,
-    title_x=0.02,
-    margin=dict(
-        l=20,
-        r=20,
-        t=60,
-        b=20
-    )
-)
+fig2 = style_fig(fig2, height=450, margin_r=20)
 
 st.plotly_chart(
     fig2,
@@ -223,7 +173,6 @@ st.plotly_chart(
 left, right = st.columns(2)
 
 with left:
-
     reg = region_sales(filtered_df)
 
     fig3 = px.bar(
@@ -233,11 +182,7 @@ with left:
         title="Region Wise Sales"
     )
 
-    fig3.update_layout(
-    template="plotly_dark",
-    height=420,
-    title_x=0.02,
-    )
+    fig3 = style_fig(fig3, height=420, margin_r=20)
 
     st.plotly_chart(
         fig3,
@@ -245,7 +190,6 @@ with left:
     )
 
 with right:
-
     cat = category_sales(filtered_df)
 
     fig4 = px.pie(
@@ -256,15 +200,11 @@ with right:
     )
 
     fig4.update_traces(
-    textposition="inside",
-    textinfo="percent+label"
+        textposition="inside",
+        textinfo="percent+label"
     )
 
-    fig4.update_layout(
-    template="plotly_dark",
-    height=420,
-    title_x=0.02,
-    )
+    fig4 = style_fig(fig4, height=420, margin_r=20)
 
     st.plotly_chart(
         fig4,
@@ -283,14 +223,15 @@ fig5 = px.bar(
     y="Sub-Category",
     orientation="h",
     title="Top Selling Sub Categories",
-    text_auto=True
 )
 
-fig5.update_layout(
-    template="plotly_dark",
-    height=450,
-    title_x=0.02,
+fig5.update_traces(
+    texttemplate="$%{x:,.0f}",
+    textposition="outside",
+    cliponaxis=False,
 )
+
+fig5 = style_fig(fig5, height=450, margin_r=70)
 
 st.plotly_chart(
     fig5,
@@ -298,11 +239,10 @@ st.plotly_chart(
 )
 
 # ----------------------------------------------------
-# DATA
+# DATA PREVIEW
 # ----------------------------------------------------
 
 with st.expander("View Dataset Preview"):
-
     st.dataframe(
         filtered_df,
         use_container_width=True,

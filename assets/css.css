@@ -278,4 +278,183 @@ button[aria-label="Expand sidebar"] svg,
 button[aria-label="Collapse sidebar"] svg {
     fill: #FFFFFF !important;
     color: #FFFFFF !important;
-}
+}
+
+/* =======================================================
+   Responsive & Readability Enhancements
+======================================================= */
+
+html, body, [data-testid="stAppViewContainer"] {
+    overflow-x: hidden !important;
+}
+
+.block-container {
+    max-width: 1400px !important;
+    padding-top: 4.3rem !important;
+    padding-bottom: 2rem !important;
+    padding-left: clamp(0.8rem, 3vw, 3rem) !important;
+    padding-right: clamp(0.8rem, 3vw, 3rem) !important;
+}
+
+/* Metric cards responsiveness */
+[data-testid="stMetric"],
+div[data-testid="metric-container"] {
+    background: linear-gradient(135deg, #161B22 0%, #1F2937 100%) !important;
+    border-radius: 18px !important;
+    padding: clamp(12px, 1.6vw, 22px) !important;
+    border: 1px solid #2E3A4E !important;
+    box-shadow: 0 8px 20px rgba(0,0,0,.35) !important;
+    transition: all .30s ease !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+}
+
+[data-testid="stMetric"]:hover,
+div[data-testid="metric-container"]:hover {
+    transform: translateY(-4px) !important;
+    border-color: rgba(96, 165, 250, 0.4) !important;
+}
+
+[data-testid="stMetricLabel"],
+div[data-testid="metric-container"] label,
+div[data-testid="metric-container"] [data-testid="stMetricLabel"] {
+    font-size: clamp(0.85rem, 0.75rem + 0.4vw, 1.05rem) !important;
+    color: #9CA3AF !important;
+    white-space: normal !important;
+    word-wrap: break-word !important;
+    overflow: visible !important;
+    text-overflow: clip !important;
+}
+
+[data-testid="stMetricValue"],
+div[data-testid="metric-container"] [data-testid="stMetricValue"] {
+    font-size: clamp(1.35rem, 0.9rem + 1.6vw, 2.1rem) !important;
+    font-weight: 700 !important;
+    color: #FFFFFF !important;
+    white-space: normal !important;
+    word-wrap: break-word !important;
+    overflow: visible !important;
+    text-overflow: clip !important;
+    line-height: 1.25 !important;
+}
+
+/* Columns wrap on smaller viewports */
+[data-testid="stHorizontalBlock"] {
+    flex-wrap: wrap !important;
+    row-gap: 1rem !important;
+}
+
+[data-testid="stColumn"],
+[data-testid="column"] {
+    min-width: min(100%, 240px) !important;
+    flex: 1 1 240px !important;
+}
+
+/* Charts and DataFrames responsiveness */
+div[data-testid="stPlotlyChart"],
+.stDataFrame,
+div[data-testid="stDataFrame"] {
+    max-width: 100% !important;
+    overflow: hidden !important;
+}
+
+/* Custom UI Component Classes */
+.rp-header {
+    margin-bottom: 1.5rem;
+}
+
+.rp-header-icon {
+    width: clamp(42px, 6vw, 56px);
+    height: clamp(42px, 6vw, 56px);
+    background: linear-gradient(135deg, rgba(30,58,138,0.4), rgba(59,130,246,0.15));
+    border: 1px solid rgba(96, 165, 250, 0.35);
+    border-radius: 16px;
+    color: #60A5FA;
+}
+
+.rp-sub {
+    color: #9CA3AF;
+    font-size: 1rem;
+}
+
+.rp-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 230px), 1fr));
+    gap: 1.25rem;
+    margin-bottom: 1.5rem;
+}
+
+.rp-card {
+    background: linear-gradient(135deg, #161B22 0%, #1b2432 100%);
+    border: 1px solid #293548;
+    border-radius: 18px;
+    padding: 18px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.25);
+    transition: transform 0.25s ease, border-color 0.25s ease;
+}
+
+.rp-card:hover {
+    transform: translateY(-4px);
+    border-color: #3B82F6;
+}
+
+.rp-card-icon {
+    width: 44px;
+    height: 44px;
+    background: rgba(59, 130, 246, 0.12);
+    border: 1px solid rgba(96, 165, 250, 0.25);
+    border-radius: 12px;
+    color: #60A5FA;
+}
+
+.rp-hero img {
+    width: 100%;
+    height: auto;
+    max-width: 1000px;
+}
+
+/* Mobile Responsive Adjustments */
+@media (max-width: 768px) {
+    .block-container {
+        padding-top: 4.1rem !important;
+        padding-left: 0.8rem !important;
+        padding-right: 0.8rem !important;
+    }
+
+    h1 {
+        font-size: 1.5rem !important;
+    }
+
+    h2 {
+        font-size: 1.25rem !important;
+    }
+
+    .rp-cards {
+        grid-template-columns: 1fr !important;
+    }
+
+    [data-testid="stColumn"],
+    [data-testid="column"] {
+        min-width: 100% !important;
+    }
+}
+
+
+
+/* =======================================================
+   FIX: keep page content below Streamlit's fixed top header
+   (on Streamlit Cloud the header band is opaque and was
+   hiding the top of every page title / icon)
+======================================================= */
+[data-testid="stMainBlockContainer"],
+[data-testid="stMain"] .block-container,
+.block-container {
+    padding-top: 4.3rem !important;
+}
+@media (max-width: 768px) {
+    [data-testid="stMainBlockContainer"],
+    [data-testid="stMain"] .block-container,
+    .block-container {
+        padding-top: 4.1rem !important;
+    }
+}

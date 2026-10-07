@@ -1,4 +1,3 @@
- 
 # pyrefly: ignore [missing-import]
 import streamlit as st
 import pandas as pd
@@ -15,6 +14,8 @@ from utils.anomaly import (
     detect_anomalies,
     anomaly_summary,
 )
+
+from components.ui import sidebar_brand, page_header, style_fig
 
 # =====================================================
 # Page Configuration
@@ -40,45 +41,13 @@ with open("assets/css.css") as f:
 # Sidebar Branding
 # =====================================================
 
-brand1, brand2 = st.sidebar.columns([1, 4], gap="small")
+sidebar_brand()
 
-with brand1:
-    st.image(
-        "assets/retailpulse-logo.png",
-        width=48
-    )
+# =====================================================
+# Page Header
+# =====================================================
 
-with brand2:
-    st.markdown(
-        """
-        <div style="padding-top:10px;">
-            <h2 style="margin:0;font-size:24px;font-weight:700;color:white;">
-                Retail Pulse
-            </h2>
-        </div>
-        """,
-        unsafe_allow_html=True,
-    )
-
-st.sidebar.markdown("---")
-
-c1,c2=st.columns([1,8])
-
-with c1:
-    st.image(
-        "assets/icons/icon-warning.svg",
-        width=45,
-    )
-
-with c2:
-    st.markdown(
-    "<h1 style='margin-top:8px;'>Anomaly Report</h1>",
-    unsafe_allow_html=True,
-    )
-
-st.caption(
-    "Detect unusual retail sales patterns using Isolation Forest and Z-Score."
-)
+page_header("warning", "Anomaly Report", "Detect unusual retail sales patterns using Isolation Forest and Z-Score.")
 
 st.markdown("---")
 
@@ -138,7 +107,7 @@ elif filter_type == "Region":
     ]
 
 # =====================================================
-# Monthly Sales
+# Detect Anomalies
 # =====================================================
 
 anomaly_df = detect_anomalies(filtered_df)
@@ -171,7 +140,7 @@ col1, col2, col3 = st.columns(3)
 
 with col1:
     st.metric(
-        "Total Months",
+        "Total Weeks",
         total_points,
     )
 
@@ -183,7 +152,7 @@ with col2:
 
 with col3:
     st.metric(
-        "Normal Months",
+        "Normal Weeks",
         normal_count,
     )
 
@@ -195,30 +164,11 @@ st.divider()
 
 plot_df = anomaly_df.copy()
 
-if "Anomaly" in plot_df.columns:
-    plot_df["Status"] = plot_df["Anomaly"].map(
-        {
-            1: "Normal",
-            -1: "Anomaly",
-        }
-    )
-
-elif "Is_Anomaly" in plot_df.columns:
-    plot_df["Status"] = plot_df["Is_Anomaly"].map(
-        {
-            False: "Normal",
-            True: "Anomaly",
-        }
-    )
-
-else:
-    plot_df["Status"] = "Normal"
-
 # =====================================================
 # Interactive Chart
 # =====================================================
 
-st.subheader("Monthly Sales with Detected Anomalies")
+st.subheader("Weekly Sales with Detected Anomalies")
 
 fig = px.scatter(
     plot_df,
@@ -228,24 +178,22 @@ fig = px.scatter(
     size="Sales",
     hover_data=["Sales"],
     title=f"{method} Detection",
+    color_discrete_map={
+        "Normal": "#60A5FA",
+        "Anomaly": "#EF4444",
+    }
 )
 
 fig.update_traces(marker=dict(size=12))
 
 fig.update_layout(
-    template="plotly_dark",
-    height=500,
-    title_x=0.02,
-    xaxis_title="Month",
+    xaxis_title="Week",
     yaxis_title="Sales",
     hovermode="closest",
-    margin=dict(
-        l=20,
-        r=20,
-        t=60,
-        b=20
-    )
 )
+
+fig = style_fig(fig, height=500, margin_r=20)
+
 st.plotly_chart(
     fig,
     use_container_width=True,

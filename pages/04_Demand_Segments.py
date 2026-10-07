@@ -1,6 +1,7 @@
-
+# pyrefly: ignore [missing-import]
 import streamlit as st
 import pandas as pd
+# pyrefly: ignore [missing-import]
 import plotly.express as px
 
 from utils.preprocessing import (
@@ -13,6 +14,8 @@ from utils.clustering import (
     demand_segmentation,
     cluster_summary,
 )
+
+from components.ui import sidebar_brand, page_header, style_fig
 
 # =====================================================
 # Page Configuration
@@ -38,45 +41,13 @@ with open("assets/css.css") as f:
 # Sidebar Branding
 # =====================================================
 
-brand1, brand2 = st.sidebar.columns([1, 4], gap="small")
+sidebar_brand()
 
-with brand1:
-    st.image(
-        "assets/retailpulse-logo.png",
-        width=48
-    )
+# =====================================================
+# Page Header
+# =====================================================
 
-with brand2:
-    st.markdown(
-        """
-        <div style="padding-top:10px;">
-            <h2 style="margin:0;font-size:24px;font-weight:700;color:white;">
-                Retail Pulse
-            </h2>
-        </div>
-        """,
-        unsafe_allow_html=True,
-    )
-
-st.sidebar.markdown("---")
-
-c1,c2=st.columns([1,8])
-
-with c1:
-    st.image(
-        "assets/icons/icon-demand.svg",
-        width=45,
-    )
-
-with c2:
-    st.markdown(
-    "<h1 style='margin-top:8px;'>Demand Segments</h1>",
-    unsafe_allow_html=True,
-    )
-
-st.caption(
-    "Identify product demand groups using K-Means Clustering."
-)
+page_header("demand", "Demand Segments", "Identify product demand groups using K-Means Clustering.")
 
 st.markdown("---")
 
@@ -99,7 +70,10 @@ cluster_count = st.sidebar.slider(
     min_value=2,
     max_value=6,
     value=3,
+    disabled=True,
+    help="Fixed at 3 clusters (High / Medium / Low demand)"
 )
+st.sidebar.caption("Fixed at 3 clusters (High / Medium / Low demand)")
 
 # =====================================================
 # Prepare Data
@@ -108,7 +82,7 @@ cluster_count = st.sidebar.slider(
 cluster_df = demand_segmentation(df)
 
 summary = cluster_summary(df)
- 
+
 # =====================================================
 # KPI Cards
 # =====================================================
@@ -117,8 +91,7 @@ total_products = len(cluster_df)
 st.subheader("Demand Summary")
 
 avg_sales = cluster_df["Total_Sales"].mean()
-
-avg_profit = cluster_df["Average_Sales"].mean()
+avg_sale_order = cluster_df["Average_Sales"].mean()
 
 col1, col2, col3 = st.columns(3)
 
@@ -131,13 +104,14 @@ with col1:
 with col2:
     st.metric(
         "Average Sales",
-        f"{avg_sales:,.0f}",
+        f"${avg_sales:,.0f}",
     )
 
 with col3:
     st.metric(
-        "Average Profit",
-        f"{avg_profit:,.0f}",
+        "Avg Sale per Order",
+        f"${avg_sale_order:,.0f}",
+        help="Mean of the average sale value across sub-categories",
     )
 
 st.divider()
@@ -163,18 +137,11 @@ fig = px.scatter(
 )
 
 fig.update_layout(
-    template="plotly_dark",
-    height=500,
-    title_x=0.02,
     xaxis_title="Average Sales",
     yaxis_title="Total Sales",
-    margin=dict(
-        l=20,
-        r=20,
-        t=60,
-        b=20
-    )
 )
+
+fig = style_fig(fig, height=500, margin_r=20)
 
 st.plotly_chart(
     fig,

@@ -11,6 +11,8 @@ import joblib
 import shap
 import calendar
 
+from components.ui import sidebar_brand, page_header, feature_cards, hero_image, style_fig
+
 # -----------------------------------------------------
 # Page Config (Streamlit rules: must be at the top!)
 # -----------------------------------------------------
@@ -36,42 +38,13 @@ except FileNotFoundError:
 # =====================================================
 # Sidebar Branding
 # =====================================================
-brand1, brand2 = st.sidebar.columns([1, 4], gap="small")
-
-with brand1:
-    st.image(
-        "assets/retailpulse-logo.png",
-        width=48
-    )
-
-with brand2:
-    st.markdown(
-        """
-        <div style="padding-top:10px;">
-            <h2 style="margin:0;font-size:24px;font-weight:700;color:white;">
-                Retail Pulse
-            </h2>
-        </div>
-        """,
-        unsafe_allow_html=True,
-    )
-
-st.sidebar.markdown("---")
+sidebar_brand()
 
 # -----------------------------------------------------
 # Header
 # -----------------------------------------------------
-col1, col2, col3 = st.columns([1, 8, 1])
-
-with col2:
-    st.title("RetailPulse: Forecasting & Demand Analytics")
-    st.caption("Retail Intelligence Dashboard")
-
-with col2:
-    st.image(
-        "assets/hero.svg",
-        width=950,
-    )
+page_header("home", "RetailPulse: Forecasting & Demand Analytics", "Retail Intelligence Dashboard")
+hero_image("assets/hero.svg")
 
 st.markdown("---")
 
@@ -98,45 +71,49 @@ st.markdown("---")
 # -----------------------------------------------------
 st.subheader("Dashboard Features")
 
-c1, c2, c3, c4 = st.columns(4)
-
-with c1:
-    st.image("assets/icons/icon-dashboard.svg", width=45)
-    st.markdown("### Sales Overview")
-
-with c2:
-    st.image("assets/icons/icon-forecast.svg", width=45)
-    st.markdown("### Forecast Explorer")
-
-with c3:
-    st.image("assets/icons/icon-warning.svg", width=45)
-    st.markdown("### Anomaly Report")
-
-with c4:
-    st.image("assets/icons/icon-demand.svg", width=45)
-    st.markdown("### Demand Segments")
-
-st.markdown("---")
+feature_cards([
+    {
+        "icon": "dashboard",
+        "title": "Sales Overview",
+        "desc": "KPIs, yearly/monthly trends, region & category analysis"
+    },
+    {
+        "icon": "forecast",
+        "title": "Forecast Explorer",
+        "desc": "Gradient Boosting vs SARIMA forecasts with MAE/RMSE/MAPE"
+    },
+    {
+        "icon": "warning",
+        "title": "Anomaly Report",
+        "desc": "Isolation Forest and Z-Score on weekly sales"
+    },
+    {
+        "icon": "demand",
+        "title": "Demand Segments",
+        "desc": "K-Means product demand clusters"
+    }
+])
 
 # -----------------------------------------------------
 # Models & Dataset
 # -----------------------------------------------------
-left, right = st.columns(2)
-
-with left:
-    st.image("assets/icons/icon-ai.svg", width=45)
-    st.subheader("Models Used")
-    st.markdown("""
-- Gradient Boosting Regressor
-- SARIMA
-- Isolation Forest
-- K-Means Clustering
-""")
-
-with right:
-    st.image("assets/icons/icon-database.svg", width=45)
-    st.subheader("Dataset")
-    st.write("Superstore Sales Dataset")
+feature_cards([
+    {
+        "icon": "ai",
+        "title": "Models Used",
+        "bullets": [
+            "Gradient Boosting Regressor",
+            "SARIMA",
+            "Isolation Forest",
+            "K-Means Clustering"
+        ]
+    },
+    {
+        "icon": "database",
+        "title": "Dataset",
+        "desc": "Superstore Sales Dataset, 9,800 records, 2015-2018"
+    }
+])
 
 st.markdown("---")
 

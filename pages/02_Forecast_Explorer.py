@@ -1,4 +1,3 @@
- 
 # pyrefly: ignore [missing-import]
 import streamlit as st
 import pandas as pd
@@ -17,6 +16,8 @@ from utils.forecasting import (
     compare_models,
     walk_forward_validation,
 )
+
+from components.ui import sidebar_brand, page_header, style_fig
 
 # =====================================================
 # Page Config
@@ -42,27 +43,15 @@ with open("assets/css.css") as f:
 # Sidebar Branding
 # =====================================================
 
-brand1, brand2 = st.sidebar.columns([1, 4], gap="small")
+sidebar_brand()
 
-with brand1:
-    st.image(
-        "assets/retailpulse-logo.png",
-        width=48
-    )
+# =====================================================
+# Page Header
+# =====================================================
 
-with brand2:
-    st.markdown(
-        """
-        <div style="padding-top:10px;">
-            <h2 style="margin:0;font-size:24px;font-weight:700;color:white;">
-                Retail Pulse
-            </h2>
-        </div>
-        """,
-        unsafe_allow_html=True,
-    )
+page_header("forecast", "Forecast Explorer", "Compare Gradient Boosting and SARIMA forecasts.")
 
-st.sidebar.markdown("---")
+st.markdown("---")
 
 # =====================================================
 # Load Dataset
@@ -230,19 +219,12 @@ for trace in fig.data:
         trace.line.dash = "dash"
 
 fig.update_layout(
-    template="plotly_dark",
-    height=500,
-    title_x=0.02,
     xaxis_title="Month",
     yaxis_title="Sales",
     hovermode="x unified",
-    margin=dict(
-        l=20,
-        r=20,
-        t=60,
-        b=20
-    )
 )
+
+fig = style_fig(fig, height=500, margin_r=20)
 
 st.plotly_chart(
     fig,
