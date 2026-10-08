@@ -44,10 +44,9 @@ The application is deployed as an interactive **Streamlit Dashboard** where user
 
 ### 🚀 Streamlit App
 
-> **Paste your deployed Streamlit link here**
 
 ```text
-https://retailpulse-rgq7dm3dok9ap7bhmappdcu.streamlit.app/
+https://advancedretailpulse-forecasting-demand-analytics-dashboard.streamlit.app/
 ```
 ### Google Colab Link:
 ```text
